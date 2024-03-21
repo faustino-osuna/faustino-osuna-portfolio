@@ -1,19 +1,54 @@
----
-import { Icon } from 'astro-icon/components';
----
-
-<section>
-  <article class="h-screen flex flex-col justify-center p-4 gap-8 text-white">
-    <div class="flex flex-col gap-3">
-        <h1 class="text-md font-semibold text-primary">Hola a todos!, soy Faustino Osuna</h1>
-        <h2 class="text-5xl">Soy Desarrollador Web</h2>
-    </div>
-    <nav>
-      <ul class="flex gap-4">
-        <li><a href="/"><Icon name={'logos:github-icon'}/></a></li>
-        <li><a href="/">Linkedin</a></li>
-      </ul>
-    </nav>
-  </article>
+<section class="h-screen w-screen flex justify-center items-center">
+  <div id="wrapper" class="[perspective:1000px]">
+    <article
+      id="ticket"
+      class="w-[800px] p-4 shadow-2xl border-2 border-black/50 aspect-[18/9] relative rounded-md bg-black/80 text-white"
+    >
+      <div class="absolute p-3 inset-0 flex gap-3">
+        <div class="w-4 h-4 bg-red-500 rounded-full"></div>
+        <div class="w-4 h-4 bg-yellow-500 rounded-full"></div>
+        <div class="w-4 h-4 bg-green-500 rounded-full"></div>
+      </div>
+      <div class="flex justify-center items-center w-full h-full">
+        <div class="w-1/2 flex flex-col items-center border-r-2 border-r-white">
+          <div>
+            <span class="text-2xl font-semibold">Faustino Osuna</span>
+            <h1 class="text-4xl font-bold">Programador Web</h1>
+          </div>
+        </div>
+        <div class="flex-1"></div>
+      </div>
+    </article>
+  </div>
 </section>
 
+<style>
+  section {
+    background-image: url("/public/background.png");
+    background-size: 500px;
+    overflow: hidden;
+  }
+</style>
+
+<script type="module">
+  const $ = (selector) => document.querySelector(selector);
+
+  const wrapper = $("#wrapper");
+  const ticket = $("#ticket");
+
+  let flag = false;
+
+  const { width, height } = document.body.getBoundingClientRect();
+
+  const halfWidth = width / 2;
+  const halfHeight = height / 2;
+
+  window.addEventListener("mousemove", (event) => {
+    const { pageX, pageY } = event;
+
+    const rotationX = ((pageX - halfWidth) / halfWidth) * 10;
+    const rotationY = ((pageY - halfHeight) / halfHeight) * 10;
+
+    ticket.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg)`;
+  });
+</script>
